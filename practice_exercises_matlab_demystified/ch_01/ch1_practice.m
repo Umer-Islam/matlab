@@ -52,7 +52,7 @@ format_long = 3 + 11/26 + 2^1.2
  format short e
  format_short_e = 7.2 *3.2
 
- % To find the ratioanl expression 😲 closest rational expression
+ % To find the ratioanl expression or 😲 closest rational expression
  format rat
  value = .6
  
