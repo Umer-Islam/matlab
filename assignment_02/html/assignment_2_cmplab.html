@@ -1,0 +1,494 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>assignment_2_cmplab</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-04-08"><meta name="DC.source" content="assignment_2_cmplab.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Question#1</a></li><li><a href="#3">Question#2</a></li><li><a href="#5">Question#3</a></li><li><a href="#6">Question#4</a></li><li><a href="#7">Question#5</a></li></ul></div><pre class="codeinput"><span class="comment">% Umer Islam</span>
+<span class="comment">% FA18-BPH-092</span>
+<span class="comment">%CMPLAB Assignment#2</span>
+</pre><h2 id="2">Question#1</h2><p>1. Write a MATLAB program which calculates the root of the equation c in the interval [0.5, 2], using False position method. Make sure to account for every possibility. Plot the given function and the calculated root.</p><pre class="codeinput">clc,clearvars,close <span class="string">all</span>; whos
+<span class="comment">% define function</span>
+f = @(x) x^3-2*sin(x); <span class="comment">% matlab takes the sin(x) values in degree by default</span>
+<span class="comment">%define interval, changing the interval will find other roots</span>
+a = -5;
+b = -1;
+<span class="comment">%tolerance</span>
+e = 0.00001;
+<span class="comment">% no. of itterations</span>
+n = 30;
+<span class="comment">%condition</span>
+<span class="keyword">if</span> f(a)*f(b)&lt;0 &amp;&amp; a&lt;b
+    <span class="keyword">for</span> i = i :n
+    c = ( ( a*f(b)-b*f(a) ) /(f(b)*f(a)));
+    fprintf(<span class="string">' root value for %d itteration  = %.5f \n'</span>,i,c)
+    <span class="keyword">if</span> abs(f(c)&lt;e)
+    <span class="keyword">break</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> f(a)*f(c)&lt;0
+        b = c;
+    <span class="keyword">else</span>
+        a = c;
+    <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+<span class="keyword">else</span>
+    disp(<span class="string">"No root lies in the interval"</span>)
+<span class="keyword">end</span>
+hold <span class="string">on</span>
+fplot(f,[-20,20])
+legend(Interpreter=<span class="string">"latex"</span>)
+grid <span class="string">on</span>
+plot(c,0,<span class="string">'or'</span>)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput">Warning: Colon operands must be real scalars. 
+ root value for 0 itteration  = 1.50365 
+ root value for 1 itteration  = -1.03143 
+ root value for 2 itteration  = 1.70626 
+ root value for 3 itteration  = -0.53207 
+ root value for 4 itteration  = 0.65521 
+Warning: Function behaves unexpectedly on array inputs. To improve performance,
+properly vectorize your function to return an output with the same size and
+shape as the input arguments. 
+</pre><img vspace="5" hspace="5" src="assignment_2_cmplab_01.png" alt=""> <h2 id="3">Question#2</h2><p>2. Write a MATLAB program which calculates the root of the function f (x) = x^3&#8722;4x&#8722;9, using Secant method. Make sure to account for every possibility. Plot the given function and the calculated root.</p><pre class="codeinput">clearvars;clc;who;close <span class="string">all</span>;
+<span class="comment">% define the function</span>
+f = @(x) x^3-4*x-9;
+<span class="comment">%intial points</span>
+x_0 = -5;
+x_1 = 5;
+e = 10^-4; <span class="comment">%tolerance, to stop the loop</span>
+n = 10;
+
+<span class="comment">%condition</span>
+<span class="keyword">for</span> i = 1:n
+    x_2 = (x_0*f(x_1)-x_1*f(x_0))/(f(x_1)-f(x_0))
+
+    x_0 = x_1;
+    x_1= x_2;
+<span class="keyword">end</span>
+<span class="comment">%plot the function and its root</span>
+hold <span class="string">on</span>
+fplot(f)
+legend(Interpreter=<span class="string">"latex"</span>)
+xlabel(<span class="string">"x"</span>)
+ylabel(<span class="string">"f(x)"</span>)
+plot(x_2,0,<span class="string">"*r"</span>)
+grid <span class="string">on</span>
+hold <span class="string">off</span>
+</pre><pre class="codeoutput">
+x_2 =
+
+    0.4286
+
+
+x_2 =
+
+    0.8845
+
+
+x_2 =
+
+   -3.5775
+
+
+x_2 =
+
+    2.7307
+
+
+x_2 =
+
+    2.6629
+
+
+x_2 =
+
+    2.7060
+
+
+x_2 =
+
+    2.7065
+
+
+x_2 =
+
+    2.7065
+
+
+x_2 =
+
+    2.7065
+
+
+x_2 =
+
+    2.7065
+
+Warning: Function behaves unexpectedly on array inputs. To improve performance,
+properly vectorize your function to return an output with the same size and
+shape as the input arguments. 
+</pre><img vspace="5" hspace="5" src="assignment_2_cmplab_02.png" alt=""> <h2 id="5">Question#3</h2><p>3. Write a MATLAB program which calculates the root of the equation x4 &#8722; x2 = 1, using the (fixed-point) Iteration method. Make sure to account for every possibility. Plot the given function and the calculated root.</p><pre class="codeinput">clearvars;clc;who,close <span class="string">all</span>;
+<span class="comment">%define the function</span>
+<span class="comment">% x^4 -x^2 - 1 = 0;  rearrange as x = sqrt(x^2-1)</span>
+f = @(x) sqrt(x^4-1) ; <span class="comment">% looking at graph tells us that we have 2 roots</span>
+<span class="comment">% f = @(x) (2^x+2)/5; % for testing the function</span>
+x0 = -2; <span class="comment">% Initial guess</span>
+tol = 10^-10;
+flag = true;
+its = 0;
+<span class="keyword">while</span> flag == true &amp;&amp; its&lt;100
+
+    x = f(x0);
+    <span class="keyword">if</span> abs(x-x0)&lt;tol
+       flag = false;
+    <span class="keyword">end</span>
+    x0 = x;
+    its = its+1;
+<span class="keyword">end</span>
+disp([x, x^4-x^2-1, its])
+hold <span class="string">on</span>
+fplot(f)
+plot(x,0,<span class="string">'or'</span>)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput">   Inf   NaN   100
+
+Warning: Function behaves unexpectedly on array inputs. To improve performance,
+properly vectorize your function to return an output with the same size and
+shape as the input arguments. 
+</pre><img vspace="5" hspace="5" src="assignment_2_cmplab_03.png" alt=""> <h2 id="6">Question#4</h2><p>Write a MATLAB program which calculates the root of the function f (x, y) = x2 &#8722;y3 using MATLAB&#8217;s fsolve function.</p><pre class="codeinput">clearvars;clc;who,close <span class="string">all</span>;
+warning(<span class="string">"fzero  'Single-variable' nonlinear zero finding"</span>)
+warning(<span class="string">"we must fix one variable by giving it a scalar value"</span>)
+fprintf(<span class="string">'lets put y =1, this will give us 2 roots'</span>)
+f = @(x) x.^2-(1).^3;
+x0= -10;
+x1 =10;
+r = fzero(f,x0)
+r1 = fzero(f,x1)
+hold <span class="string">on</span>
+fplot(f)
+xlabel(<span class="string">"x"</span>,interpreter = <span class="string">"latex"</span>)
+
+ylabel(<span class="string">"f(x)"</span>,interpreter = <span class="string">"latex"</span>)
+legend(Interpreter=<span class="string">"latex"</span>)
+box <span class="string">off</span>
+plot(r,0,<span class="string">'*r'</span>)
+plot(r1,0,<span class="string">'*r'</span>)
+grid <span class="string">on</span>
+hold <span class="string">off</span>
+</pre><pre class="codeoutput">Warning: fzero  'Single-variable' nonlinear zero finding 
+Warning: we must fix one variable by giving it a scalar value 
+lets put y =1, this will give us 2 roots
+r =
+
+   -1.0000
+
+
+r1 =
+
+    1.0000
+
+</pre><img vspace="5" hspace="5" src="assignment_2_cmplab_04.png" alt=""> <h2 id="7">Question#5</h2><p>Write a MATLAB program which calculates the roots of the polynomial x3 = 2 &#8722; x. Plot the given polynomial and the calculated roots.</p><pre class="codeinput">clc,clearvars,whos, close <span class="string">all</span>
+<span class="comment">% define the function</span>
+f = @(x) x^3+x-2;
+<span class="comment">% define the interval</span>
+a = -10;
+b = 20;
+
+<span class="comment">% a = input('select left side of the interval');</span>
+<span class="comment">% b = input('select rigth side of the interval');</span>
+
+<span class="comment">% define the itterations</span>
+n = 29;
+e = 0.00001;
+<span class="comment">% write conditions</span>
+<span class="keyword">if</span> f(a)*f(b)&lt;0
+	<span class="keyword">for</span> i = i :n
+		c = ((a+b)/2);
+        fprintf(<span class="string">'root is : %.6f ,  no. of itteration:  %d\n'</span>,c,i)
+        <span class="keyword">if</span> abs(a-c)&lt;e || abs(b-c)&lt;e
+            <span class="keyword">break</span>
+        <span class="keyword">end</span>
+		<span class="keyword">if</span> f(a)*f(c)&lt;0
+		b =c;
+		<span class="keyword">else</span>
+		a =c;
+		<span class="keyword">end</span>
+	<span class="keyword">end</span>
+<span class="keyword">else</span>
+disp(<span class="string">'No root lies in the interval'</span>)
+<span class="keyword">end</span>
+<span class="comment">%plot function and its root in the given interval</span>
+hold <span class="string">on</span>
+xlabel(<span class="string">"x"</span>,Interpreter=<span class="string">"latex"</span>,FontSize=15)
+ylabel(<span class="string">"f(x)"</span>,Interpreter=<span class="string">"latex"</span>,FontSize=15)
+legend(<span class="string">'Interpreter'</span>,<span class="string">'latex'</span>,FontSize=15)
+box <span class="string">off</span>
+fplot(f,lineWidth=1.5)
+plot(c,0,<span class="string">'*r'</span>,LineWidth=2)
+grid <span class="string">on</span>
+hold <span class="string">off</span>
+</pre><pre class="codeoutput">Warning: Colon operands must be real scalars. 
+root is : 5.000000 ,  no. of itteration:  0
+root is : -2.500000 ,  no. of itteration:  1
+root is : 1.250000 ,  no. of itteration:  2
+root is : -0.625000 ,  no. of itteration:  3
+root is : 0.312500 ,  no. of itteration:  4
+root is : 0.781250 ,  no. of itteration:  5
+root is : 1.015625 ,  no. of itteration:  6
+root is : 0.898438 ,  no. of itteration:  7
+root is : 0.957031 ,  no. of itteration:  8
+root is : 0.986328 ,  no. of itteration:  9
+root is : 1.000977 ,  no. of itteration:  10
+root is : 0.993652 ,  no. of itteration:  11
+root is : 0.997314 ,  no. of itteration:  12
+root is : 0.999146 ,  no. of itteration:  13
+root is : 1.000061 ,  no. of itteration:  14
+root is : 0.999603 ,  no. of itteration:  15
+root is : 0.999832 ,  no. of itteration:  16
+root is : 0.999947 ,  no. of itteration:  17
+root is : 1.000004 ,  no. of itteration:  18
+root is : 0.999975 ,  no. of itteration:  19
+root is : 0.999990 ,  no. of itteration:  20
+root is : 0.999997 ,  no. of itteration:  21
+Warning: Function behaves unexpectedly on array inputs. To improve performance,
+properly vectorize your function to return an output with the same size and
+shape as the input arguments. 
+</pre><img vspace="5" hspace="5" src="assignment_2_cmplab_05.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+% Umer Islam 
+% FA18-BPH-092
+%CMPLAB Assignment#2
+%%                                 Question#1 
+% 1. Write a MATLAB program which calculates the root of the equation c
+% in the interval [0.5, 2], using False position method. Make sure to account for every
+% possibility. Plot the given function and the calculated root.
+
+clc,clearvars,close all; whos
+% define function
+f = @(x) x^3-2*sin(x); % matlab takes the sin(x) values in degree by default
+%define interval, changing the interval will find other roots
+a = -5;
+b = -1;
+%tolerance
+e = 0.00001;
+% no. of itterations
+n = 30;
+%condition
+if f(a)*f(b)<0 && a<b
+    for i = i :n 
+    c = ( ( a*f(b)-b*f(a) ) /(f(b)*f(a)));
+    fprintf(' root value for %d itteration  = %.5f \n',i,c)
+    if abs(f(c)<e)
+    break
+    end
+    if f(a)*f(c)<0
+        b = c;
+    else 
+        a = c;
+    end
+    end
+
+else
+    disp("No root lies in the interval")
+end
+hold on 
+fplot(f,[-20,20])
+legend(Interpreter="latex")
+grid on
+plot(c,0,'or')
+hold off
+
+%%                             Question#2
+% 2. Write a MATLAB program which calculates the root of the function f (x) = x^3−4x−9,
+% using Secant method. Make sure to account for every possibility. Plot the given function
+% and the calculated root.
+clearvars;clc;who;close all;
+% define the function
+f = @(x) x^3-4*x-9;
+%intial points
+x_0 = -5;
+x_1 = 5;
+e = 10^-4; %tolerance, to stop the loop
+n = 10;
+
+%condition
+for i = 1:n
+    x_2 = (x_0*f(x_1)-x_1*f(x_0))/(f(x_1)-f(x_0))
+    
+    x_0 = x_1;
+    x_1= x_2;
+end
+%plot the function and its root
+hold on
+fplot(f)
+legend(Interpreter="latex")
+xlabel("x")
+ylabel("f(x)")
+plot(x_2,0,"*r")
+grid on
+hold off
+
+%%
+
+%%                             Question#3
+% 
+% 3. Write a MATLAB program which calculates the root of the equation x4 − x2 = 1,
+% using the (fixed-point) Iteration method. Make sure to account for every possibility. Plot
+% the given function and the calculated root.
+clearvars;clc;who,close all;
+%define the function
+% x^4 -x^2 - 1 = 0;  rearrange as x = sqrt(x^2-1)
+f = @(x) sqrt(x^4-1) ; % looking at graph tells us that we have 2 roots
+% f = @(x) (2^x+2)/5; % for testing the function
+x0 = -2; % Initial guess
+tol = 10^-10;
+flag = true;
+its = 0;
+while flag == true && its<100
+    
+    x = f(x0);
+    if abs(x-x0)<tol
+       flag = false;
+    end
+    x0 = x;
+    its = its+1;
+end
+disp([x, x^4-x^2-1, its])
+hold on
+fplot(f)
+plot(x,0,'or')
+hold off
+%%                             Question#4
+% Write a MATLAB program which calculates the root of the function f (x, y) = x2 −y3
+% using MATLAB’s fsolve function.
+clearvars;clc;who,close all;
+warning("fzero  'Single-variable' nonlinear zero finding")
+warning("we must fix one variable by giving it a scalar value")
+fprintf('lets put y =1, this will give us 2 roots')
+f = @(x) x.^2-(1).^3;
+x0= -10;
+x1 =10;
+r = fzero(f,x0)
+r1 = fzero(f,x1)
+hold on
+fplot(f)
+xlabel("x",interpreter = "latex")
+
+ylabel("f(x)",interpreter = "latex")
+legend(Interpreter="latex")
+box off
+plot(r,0,'*r')
+plot(r1,0,'*r')
+grid on
+hold off
+
+%%                             Question#5
+% Write a MATLAB program which calculates the roots of the polynomial x3 = 2 − x.
+% Plot the given polynomial and the calculated roots.
+clc,clearvars,whos, close all 
+% define the function
+f = @(x) x^3+x-2;
+% define the interval
+a = -10; 
+b = 20; 
+
+% a = input('select left side of the interval');
+% b = input('select rigth side of the interval');
+
+% define the itterations
+n = 29;
+e = 0.00001;
+% write conditions
+if f(a)*f(b)<0
+	for i = i :n
+		c = ((a+b)/2);
+        fprintf('root is : %.6f ,  no. of itteration:  %d\n',c,i)
+        if abs(a-c)<e || abs(b-c)<e
+            break
+        end
+		if f(a)*f(c)<0
+		b =c;
+		else 
+		a =c;
+		end
+	end
+else
+disp('No root lies in the interval')
+end
+%plot function and its root in the given interval
+hold on 
+xlabel("x",Interpreter="latex",FontSize=15)
+ylabel("f(x)",Interpreter="latex",FontSize=15)
+legend('Interpreter','latex',FontSize=15) 
+box off
+fplot(f,lineWidth=1.5)
+plot(c,0,'*r',LineWidth=2)
+grid on 
+hold off
+##### SOURCE END #####
+--></body></html>
