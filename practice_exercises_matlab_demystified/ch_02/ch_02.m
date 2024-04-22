@@ -38,3 +38,30 @@ exp_x_data_points = exp(x_data_points)
 
 
 
+%%
+clearvars,clc, close all, who
+format short
+% x = [100:-5:80];
+x =[3;6;9];
+magnitude_x  = sum(x.*x);
+square_magnitude_x = sqrt(magnitude_x);
+disp(square_magnitude_x)
+%% magnitude of a complex vector
+u =[1i;1+2i;4];
+x= conj(u) .* u
+y = sum(x)
+sqrt (y)
+%% buildin dot product command
+clearvars,clc
+u =[1i;1+2i;4];
+a = [1;4;7;];
+b = [2;-1;5];
+c = dot(a,b)
+u_dot = dot(u,u)
+%% cross product
+f_x = [1,2,3];
+B = [2,3,4];
+cross_product= cross(f_x,B)
+
+%%
+zeros(4,1)
