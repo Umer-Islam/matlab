@@ -16,20 +16,22 @@ b = -1;
 %tolerance
 e = 0.00001;
 % no. of itterations
-n = 30;
+n = 300;
 %condition
 if f(a)*f(b)<0 && a<b
-    for i = i :n 
-    c = ( ( a*f(b)-b*f(a) ) /(f(b)*f(a)));
-    fprintf(' root value for %d itteration  = %.5f \n',i,c)
-    if abs(f(c)<e)
-    break
-    end
-    if f(a)*f(c)<0
-        b = c;
-    else 
-        a = c;
-    end
+    for i = i :n
+
+        c = ( ( a*f(b)-b*f(a) ) /(f(b)*f(a)));
+        % c = ( ( a*f(b)-b*f(a) ) /(f(b)-f(a)));
+        fprintf(' root value for %d itteration  = %.5f \n',i,c)
+        if abs(f(c)<e)
+            break
+        end
+        if f(a)*f(c)<0
+            b = c;
+        else
+            a = c;
+        end
     end
 
 else
@@ -58,7 +60,7 @@ n = 10;
 %condition
 for i = 1:n
     x_2 = (x_0*f(x_1)-x_1*f(x_0))/(f(x_1)-f(x_0))
-    
+
     x_0 = x_1;
     x_1= x_2;
 end
@@ -72,7 +74,6 @@ plot(x_2,0,"*r")
 grid on
 hold off
 
-%%
 
 %%                             Question#3
 % 
@@ -89,10 +90,10 @@ tol = 10^-10;
 flag = true;
 its = 0;
 while flag == true && its<100
-    
+
     x = f(x0);
     if abs(x-x0)<tol
-       flag = false;
+        flag = false;
     end
     x0 = x;
     its = its+1;
@@ -153,7 +154,7 @@ if f(a)*f(b)<0
 		if f(a)*f(c)<0
 		b =c;
 		else 
-		a =c;
+    		a =c;
 		end
 	end
 else
