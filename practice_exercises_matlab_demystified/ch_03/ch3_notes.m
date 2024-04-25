@@ -68,3 +68,21 @@ clearvars ,clc ,close all;
 t = [0:5:200];
 f = exp(-0.01*t).*sin(t/4);
 stem(t,f,'dr')
+
+%% meshgrid and countours
+clearvars,clc,close all
+[x,y] = meshgrid(-10:0.1:10,20:0.1:30)
+z = x.^2 + y.^2;
+contour(x,y,z)
+% axis[-100,100,-100,100]
+%% 3d plot
+clearvars ,clc,close all
+[x,y] = meshgrid(-2*pi:.1:2*pi);
+z = x.^2 + y.^2;
+% hold on
+surfl(x,y,z)
+xlabel('x')
+ylabel('y')
+zlabel('z')
+shading flat
+% hold off
