@@ -129,29 +129,23 @@ elseif lowest_value == lowest_value(3)
 end
 
 
-%% Question#06  Evaluate the following double integral using MATLAB’s int function.
+%% Question#06  
+% Evaluate the following double integral using MATLAB’s int function.
 clc,clearvars,close all; whos
 
-% Import symbolic math library
 syms x t
 
-% Define the function to integrate
 fx = x^2;
 ft =  3 * log(t);
 
-% Define the integration limits for x and y
 x_start = 1;
 x_end = 2;
 t_start = 0;
 t_end = 1;
 
-% Calculate the double integral
-% First, calculate the integral of f with respect to y from y_start to y_end.
 fx_int = int(fx, x, x_start, x_end);
 
-% Then, integrate the result with respect to x from x_start to x_end.
 ft_int = int(ft, t, t_start, t_end);
 II = fx_int+ft_int;
 
-% Display the calculated double integral
 fprintf('The double integral of f = x^2 + 3 * log(t) over the range x = [0,1] and t = [1,2] is: %s\n', II);
