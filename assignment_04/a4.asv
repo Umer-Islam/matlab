@@ -92,16 +92,16 @@ end
 figure;
 subplot(2, 1, 1);
 plot(t_values, x_values, 'b-');
-xlabel('Time (s)','interpreter','latex');
-ylabel('Height (x)','interpreter','latex');
-title('Height vs. Time','interpreter','latex');
+xlabel('Time (s)');
+ylabel('Height (x)');
+title('Height vs. Time');
 grid on;
 
 subplot(2, 1, 2);
 plot(t_values, v_values, 'r-');
-xlabel('Time (s)','interpreter','latex');
-ylabel('Velocity (v)','interpreter','latex');
-title('Velocity vs. Time','interpreter','latex');
+xlabel('Time (s)');
+ylabel('Velocity (v)');
+title('Velocity vs. Time');
 grid on;
 
 
@@ -122,7 +122,7 @@ x0 = 0;
 [x_grid, t_grid] = meshgrid(linspace(-4, 4, 20), linspace(-4, 4, 20));
 
 % Compute the vector field
-dxdt = sin(x_grid + t_grid.^2);
+dxdt = sin(x_grid) + t_grid.^2;
 
 % Normalize the vector field for better visualization
 dxdt_norm = dxdt ./ sqrt(dxdt.^2 + 1);
@@ -145,9 +145,9 @@ quiver(t_grid, x_grid, ones(size(t_grid)), dxdt_norm, 'r');
 plot(t, x, 'b', 'LineWidth', 2);
 
 % Set plot labels and title
-xlabel('t','interpreter','latex');
-ylabel('x','interpreter','latex');
-title('Solution and Vector Field of dx/dt = sin(x + t^2)','interpreter','latex');
+xlabel('t');
+ylabel('x');
+title('Solution and Vector Field of dx/dt = sin(x) + t^2');
 xlim([-4 4]);
 ylim([-4 4]);
 grid on;
@@ -175,9 +175,9 @@ tspan = [0, 20]; % Time span for simulation
 figure;
 subplot(2, 1, 1);
 plot(t, y(:, 1), 'b-', 'LineWidth', 2);
-xlabel('Time','interpreter','latex');
-ylabel('Prey Population','interpreter','latex');
-title('Prey Population vs. Time','interpreter','latex');
+xlabel('Time');
+ylabel('Prey Population');
+title('Prey Population vs. Time');
 grid on;
 
 subplot(2, 1, 2);
